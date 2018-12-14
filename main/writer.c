@@ -17,12 +17,19 @@ extern tagWriter etagsWriter;
 extern tagWriter xrefWriter;
 extern tagWriter jsonWriter;
 
+// add begin by fanhongxuan@gmail.com
+extern tagWriter rocksdbWriter;
+// add end by fanhongxuan@gmail.com
+
 static tagWriter *writerTable [WRITER_COUNT] = {
 	[WRITER_U_CTAGS] = &uCtagsWriter,
 	[WRITER_E_CTAGS] = &eCtagsWriter,
 	[WRITER_ETAGS] = &etagsWriter,
 	[WRITER_XREF]  = &xrefWriter,
 	[WRITER_JSON]  = &jsonWriter,
+    // add begin by fanhongxuan@gmail.com
+    [WRITER_ROCKSDB] = &rocksdbWriter,
+    // add end by fanhongxuan@gmail.com
 };
 
 static tagWriter *writer;

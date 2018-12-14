@@ -80,7 +80,7 @@
 			verbose ("Entering configuration stage: loading %s\n", StageDescription[Stage]); \
 		}																\
 	} while (0)
-#define ACCEPT(STAGE) (1UL << OptionLoadingStage##STAGE)
+#define ACCEPT(STAGE) (1 << OptionLoadingStage##STAGE)
 
 /*
 *   Data declarations
@@ -810,6 +810,9 @@ static void setXrefMode (void)
 	setTagWriter (WRITER_XREF);
 }
 
+            static void setRocksdbMode(void){
+                setTagWriter(WRITER_ROCKSDB);
+            }
 #ifdef HAVE_JANSSON
 static void setJsonMode (void)
 {
@@ -2323,6 +2326,11 @@ static void processOutputFormat (const char *const option CTAGS_ATTR_UNUSED,
 		setEtagsMode ();
 	else if (strcmp (parameter, "xref") == 0)
 		setXrefMode ();
+                // add begin by fanhongxuan@gmail.com
+                else if (strcmp(parameter, "rocksdb") == 0){
+                    setRocksdbMode();
+                }
+                // add end by fanhongxuan@gmail.com
 #ifdef HAVE_JANSSON
 	else if (strcmp (parameter, "json") == 0)
 		setJsonMode ();

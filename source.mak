@@ -117,6 +117,7 @@ MAIN_SRCS =				\
 	main/writer.c			\
 	main/writer-etags.c		\
 	main/writer-ctags.c		\
+	main/writer-rocksdb.c           \
 	main/writer-json.c		\
 	main/writer-xref.c		\
 	main/xtag.c			\

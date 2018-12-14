@@ -25,6 +25,9 @@ typedef enum eWriterType {
 	WRITER_ETAGS,
 	WRITER_XREF,
 	WRITER_JSON,
+        // add begin by fanhongxuan@gmail.com
+        WRITER_ROCKSDB,
+        // add end by fanhongxuan@gmail.com
 	WRITER_COUNT,
 } writerType;
 
