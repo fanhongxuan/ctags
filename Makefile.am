@@ -57,6 +57,14 @@ ctags_CPPFLAGS+= $(REGCOMP_CPPFLAGS)
 ctags_CPPFLAGS+= -DHAVE_REPOINFO_H
 
 ctags_CFLAGS   =
+# add begin by fanhongxuan@gmail.com
+#ctags_CFLAGS += -I./include -L./lib -lrocksdb -DROCKSDB_PLATFORM_POSIX -DROCKSDB_LIB_IO_POSIX  -DOS_LINUX -fno-builtin-memcmp -DROCKSDB_FALLOCATE_PRESENT -DZLIB -DROCKSDB_MALLOC_USABLE_SIZE -DROCKSDB_PTHREAD_ADAPTIVE_MUTEX -DROCKSDB_BACKTRACE -DROCKSDB_RANGESYNC_PRESENT -DROCKSDB_SCHED_GETCPU_PRESENT -march=native  -DHAVE_SSE42 -DHAVE_PCLMUL -DROCKSDB_SUPPORT_THREAD_LOCAL
+#ctags_LDFLAGS =
+#ctags_LDFLAGS += -octags
+#ctags_CC = g++
+# ctags_LINK = g++
+# add end by fanhongxuan@gmail.com
+
 ctags_CFLAGS  += $(EXTRA_CFLAGS)
 ctags_CFLAGS  += $(WARNING_CFLAGS)
 ctags_CFLAGS  += $(COVERAGE_CFLAGS)
@@ -68,6 +76,9 @@ ctags_CFLAGS  += $(ASPELL_CFLAGS)
 ctags_CFLAGS  += $(SECCOMP_CFLAGS)
 
 ctags_LDADD  =
+#ctags_LDADD +=  -L./lib/ -lrocksdb -lpthread -lrt -lz
+ctags_LDADD += -L./db -lgloutil -lglodb 
+ctags_LDADD += -lpthread -ldl
 ctags_LDADD += $(LIBXML_LIBS)
 ctags_LDADD += $(JANSSON_LIBS)
 ctags_LDADD += $(LIBYAML_LIBS)

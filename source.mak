@@ -269,11 +269,16 @@ YAML_SRCS = \
 	  \
 	  $(NULL)
 
+# SQLITE_HEADS = sqlite3/sqlite3.h sqlite3/sqlite3ext.h
+# SQLITE_SRCS = sqlite3/sqlite3.c
+DB_HEADS = db/db.h db/strbuf.h db/dbop.h db/die.h db/checkalloc.h db/char.h db/strlimcpy.h db/env.h db/conf.h db/locatestring.h
+# DB_SRCS = db/strbuf.c db/dbop.c db/die.c db/checkalloc.c db/char.c  db/strlimcpy.c db/test.c db/locatestring.c db/stub.c
+DB_SRCS = db/stub.c
 DEBUG_HEADS = main/debug.h
 DEBUG_SRCS = main/debug.c
 
-ALL_HEADS = $(MAIN_HEADS) $(PARSER_HEADS) $(DEBUG_HEADS)
-ALL_SRCS = $(MAIN_SRCS) $(PARSER_SRCS) $(DEBUG_SRCS)
+ALL_HEADS = $(MAIN_HEADS) $(PARSER_HEADS) $(DB_HEADS) $(DEBUG_HEADS)
+ALL_SRCS = $(MAIN_SRCS) $(PARSER_SRCS) $(DB_SRCS) $(DEBUG_SRCS)
 
 ENVIRONMENT_HEADS =
 ENVIRONMENT_SRCS =

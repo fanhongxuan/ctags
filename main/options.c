@@ -82,6 +82,7 @@
 	} while (0)
 #define ACCEPT(STAGE) (1 << OptionLoadingStage##STAGE)
 
+            
 /*
 *   Data declarations
 */
@@ -3193,6 +3194,7 @@ static void processLongOption (
 		error (FATAL, "Unknown option: --%s", option);
 }
 
+            extern void SetDbAppend(void);
 static void processShortOption (
 		const char *const option, const char *const parameter)
 {
@@ -3212,6 +3214,7 @@ static void processShortOption (
 		case 'a':
 			checkOptionOrder (option, false);
 			Option.append = true;
+                    SetDbAppend();
 			break;
 #ifdef DEBUG
 		case 'b':
@@ -3250,6 +3253,7 @@ static void processShortOption (
 			else if (parameter [0] == '-'  &&  parameter [1] != '\0')
 				error (FATAL, "output file name may not begin with a '-'");
 			Option.tagFileName = stringCopy (parameter);
+                    SetDbName(Option.tagFileName);
 			break;
 		case 'F':
 			Option.backward = false;

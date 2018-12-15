@@ -642,6 +642,8 @@ static void sanitizeEnviron (void)
  *		Start up code
  */
 
+extern void OnExit(int code);
+
 extern int main (int argc CTAGS_ATTR_UNUSED, char **argv)
 {
 	cookedArgs *args;
@@ -696,7 +698,9 @@ extern int main (int argc CTAGS_ATTR_UNUSED, char **argv)
 #endif
 
 	finiDefaultTrashBox();
-
+    
+    OnExit(0);
+    
 	if (Option.printLanguage)
 		return (Option.printLanguage == true)? 0: 1;
 
