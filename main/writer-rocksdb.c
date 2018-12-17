@@ -93,14 +93,17 @@ static int writeRocksdbEntry (tagWriter *writer,
     if (pScope == NULL){
         pScope = "";
     }
-    snprintf(key,1024, "%s/%s/%s", 
-        renderFieldEscaped(writer->type, FIELD_KIND, tag, NO_PARSER_FIELD, NULL), pScope,
+    const char *pLan = renderFieldEscaped(writer->type, FIELD_LANGUAGE, tag, NO_PARSER_FIELD, NULL); 
+    if (strcmp("C++", pLan) == 0){
+        pLan = "C";
+    }
+    snprintf(key,1024, "%s/%s/%s/%s",
+        renderFieldEscaped(writer->type, FIELD_KIND, tag, NO_PARSER_FIELD, NULL), pLan, pScope,
         renderFieldEscaped(writer->type, FIELD_NAME, tag, NO_PARSER_FIELD, NULL));
     printf("key:%s\n", key);
-    snprintf(value, 1024, "%s'%ld'%ld'%s'%s'%s'%s'%s",
+    snprintf(value, 1024, "%s'%ld'%ld'%s'%s'%s'%s",
         renderFieldEscaped(writer->type, FIELD_INPUT_FILE, tag, NO_PARSER_FIELD, NULL),
         tag->lineNumber,tag->extensionFields.endLine,
-        renderFieldEscaped(writer->type, FIELD_LANGUAGE, tag, NO_PARSER_FIELD, NULL),
         renderFieldEscaped(writer->type, FIELD_ACCESS, tag, NO_PARSER_FIELD, NULL),
         renderFieldEscaped(writer->type, FIELD_INHERITANCE, tag, NO_PARSER_FIELD, NULL),
         renderFieldEscaped(writer->type, FIELD_TYPE_REF, tag, NO_PARSER_FIELD, NULL),
