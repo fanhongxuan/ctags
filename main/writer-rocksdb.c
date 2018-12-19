@@ -93,6 +93,10 @@ static int writeRocksdbEntry (tagWriter *writer,
     if (pScope == NULL){
         pScope = "";
     }
+    if (strlen(pScope) > strlen("__anon") && strncmp(pScope, "__anon", strlen("__anon")) == 0){
+        pScope = "__anon";
+        printf("Use __anon as scope\n");
+    }
     const char *pLan = renderFieldEscaped(writer->type, FIELD_LANGUAGE, tag, NO_PARSER_FIELD, NULL); 
     if (strcmp("C++", pLan) == 0){
         pLan = "C";
