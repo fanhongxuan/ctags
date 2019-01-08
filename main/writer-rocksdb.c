@@ -41,10 +41,10 @@ tagWriter rocksdbWriter = {
 
 static DBOP *theDb = NULL;
 static char *theDbPath = "/tmp/ctagsdb";
-static int gMode = 1;
+static int gMode = 1; // create
 static int gTagCount = 0;
 void SetDbAppend(){
-    gMode = 2;
+    gMode = 2; // modify
 }
 
 void SetDbName(const char *dbname){
@@ -130,8 +130,12 @@ static int writeRocksdbEntry (tagWriter *writer,
         pScope = "";
     }
     if (strlen(pScope) > strlen("__anon") && strncmp(pScope, "__anon", strlen("__anon")) == 0){
-        pScope = "__anon";
-        // printf("Use __anon as scope\n");
+        if (strcmp("e", renderFieldEscaped(writer->type, FIELD_ACCESS, tag, NO_PARSER_FIELD, NULL)) == 0){
+            // note:fanhongxuan@gmail.com
+            // only mark the type of enum to __anon.
+            pScope = "__anon";
+        }
+                // printf("Use __anon as scope\n");
     }
     const char *pLan = renderFieldEscaped(writer->type, FIELD_LANGUAGE, tag, NO_PARSER_FIELD, NULL); 
     if (strcmp("C++", pLan) == 0){
@@ -151,7 +155,5 @@ static int writeRocksdbEntry (tagWriter *writer,
     // printf("value:%s\n", value);
     storeFile(pFileName, key);
     writeDb(key, value);
-    // snprintf(key, 1024, "%s/%s%s", pType, pClass, pName);
-    // printf("key:%s\n", key);
     return 0;
 }
