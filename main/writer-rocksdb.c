@@ -130,7 +130,7 @@ static int writeRocksdbEntry (tagWriter *writer,
         pScope = "";
     }
     if (strlen(pScope) > strlen("__anon") && strncmp(pScope, "__anon", strlen("__anon")) == 0){
-        if (strcmp("e", renderFieldEscaped(writer->type, FIELD_ACCESS, tag, NO_PARSER_FIELD, NULL)) == 0){
+        if (strcmp("e", renderFieldEscaped(writer->type, FIELD_KIND, tag, NO_PARSER_FIELD, NULL)) == 0){
             // note:fanhongxuan@gmail.com
             // only mark the type of enum to __anon.
             pScope = "__anon";
